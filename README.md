@@ -129,7 +129,7 @@ If no transactions exist in the last 60 seconds, all values must return
 ## Clone the repository
 
 ``` bash
-git clone [https://github.com/ohraineri/transaction-statistics-api](https://github.com/ohraineri/transaction-statistics-api)
+git clone https://github.com/ohraineri/transaction-statistics-api
 ```
 
 ## Enter the project directory
