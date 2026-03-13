@@ -213,3 +213,6 @@ statistics.window.seconds=60
 # Author
 
 Developed as part of the Itaú Backend Programming Challenge.
+
+# Reference
+[desafio-itau-backend](https://github.com/feltex/desafio-itau-backend) - [andrefelixbr](https://github.com/andrefelixbr) and [feltex](https://github.com/feltex)
