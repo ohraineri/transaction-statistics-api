@@ -3,28 +3,29 @@ package io.raineri.statistics.service.infrastructure.database.index;
 import java.util.*;
 
 public class DateIndex {
-    private TreeMap<Integer, HashSet<Integer>> data = new TreeMap<>();
+    private TreeMap<Integer, HashSet<Integer>> entriesByDate = new TreeMap<>();
 
-    public void addIndex(Integer index, Integer value) {
-        if(data.containsKey(index)) {
-            data.get(index).add(value);
+    public void add(Integer date, Integer rowId) {
+        if (entriesByDate.containsKey(date)) {
+            entriesByDate.get(date).add(rowId);
+            return;
         }
-        data.put(index, new HashSet<>(Set.of(value)));
+        entriesByDate.put(date, new HashSet<>(Set.of(rowId)));
     }
 
-    public NavigableMap getByRange(int startDate, int endDate) {
-        return data.subMap(startDate, true, endDate, true);
+    public NavigableMap<Integer, HashSet<Integer>> findByDateRange(int startDate, int endDate) {
+        return entriesByDate.subMap(startDate, true, endDate, true);
     }
 
-    public HashSet get(Integer index) {
-        return data.get(index);
+    public HashSet<Integer> findByDate(Integer date) {
+        return entriesByDate.get(date);
     }
 
-    public void cleanIndex() {
-        data.clear();
+    public void clear() {
+        entriesByDate.clear();
     }
 
-    public int sizeIndex() {
-        return data.size();
+    public int size() {
+        return entriesByDate.size();
     }
 }
