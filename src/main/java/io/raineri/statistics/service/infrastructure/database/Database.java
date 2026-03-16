@@ -19,4 +19,12 @@ public class Database {
         indexCounter += 1;
         return indexCounter;
     }
+
+    static public void clean() {
+        table.clear();
+        DateIndex.clear();
+    }
+    public static HashMap<Long, Transaction> getTable() {
+        return table;
+    }
 }
