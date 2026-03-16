@@ -31,4 +31,8 @@ public class Transaction {
             // Error Handler
         }
     }
+
+    public OffsetDateTime getDate() {
+        return date;
+    }
 }
