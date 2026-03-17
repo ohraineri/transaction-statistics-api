@@ -1,6 +1,10 @@
 package io.raineri.statistics.service.infrastructure.database;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.NavigableMap;
+import java.time.OffsetDateTime;
 import io.raineri.statistics.service.entity.Transaction;
 import io.raineri.statistics.service.infrastructure.database.index.DateIndex;
 
@@ -24,6 +28,18 @@ public class Database {
         table.clear();
         DateIndex.clear();
     }
+
+    static public ArrayList<Transaction> whereDate(OffsetDateTime startDate, OffsetDateTime endDate){
+        NavigableMap<Long, HashSet<Long>> result = DateIndex.findByDateRange(
+                startDate.toEpochSecond(),
+                endDate.toEpochSecond()
+        );
+
+        ArrayList<Transaction> arrayList = new ArrayList<>();
+        result.forEach((key, value) -> value.forEach(k -> arrayList.add(table.get(k))));
+        return arrayList;
+    }
+
     public static HashMap<Long, Transaction> getTable() {
         return table;
     }
