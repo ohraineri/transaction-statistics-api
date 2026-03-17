@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.NavigableMap;
 import java.time.OffsetDateTime;
-import io.raineri.statistics.service.entity.Transaction;
+import io.raineri.statistics.service.domain.entity.Transaction;
 import io.raineri.statistics.service.infrastructure.database.index.DateIndex;
 
 
