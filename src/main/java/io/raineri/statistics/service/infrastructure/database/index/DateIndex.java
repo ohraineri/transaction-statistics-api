@@ -8,6 +8,7 @@ public class DateIndex {
     static public void add(Long date, Long rowId) {
         if (entriesByDate.containsKey(date)) {
             entriesByDate.get(date).add(rowId);
+            return ;
         }
         entriesByDate.put(date, new HashSet<>(Set.of(rowId)));
     }
