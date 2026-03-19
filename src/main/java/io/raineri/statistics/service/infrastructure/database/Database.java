@@ -14,9 +14,10 @@ public class Database {
     static private long indexCounter = 0;
     final static private HashMap<Long, Transaction> table = new HashMap<>();
 
-    static public void add(Transaction transaction) {
+    static public Transaction add(Transaction transaction) {
         table.put(retrieveConcreteIndex(), transaction);
         DateIndex.add(transaction.getDate().toEpochSecond(), indexCounter);
+        return transaction;
     }
 
     static public long retrieveConcreteIndex() {
@@ -29,14 +30,14 @@ public class Database {
         DateIndex.clear();
     }
 
-    static public ArrayList<Transaction> whereDate(OffsetDateTime startDate, OffsetDateTime endDate){
+    static public ArrayList<Integer> whereDate(OffsetDateTime startDate, OffsetDateTime endDate){
         NavigableMap<Long, HashSet<Long>> result = DateIndex.findByDateRange(
                 startDate.toEpochSecond(),
                 endDate.toEpochSecond()
         );
 
-        ArrayList<Transaction> arrayList = new ArrayList<>();
-        result.forEach((key, value) -> value.forEach(k -> arrayList.add(table.get(k))));
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        result.forEach((key, value) -> value.forEach(k -> arrayList.add(table.get(k).getValue())));
         return arrayList;
     }
 
