@@ -13,16 +13,12 @@ import io.raineri.statistics.service.application.usecase.contract.RemoveTransact
 
 @RestController
 public class TransactionController {
-    private AddTransactionImpl addTransaction;
-    private RemoveTransactionImpl removeTransaction;
+    private final AddTransactionImpl addTransaction;
+    private final RemoveTransactionImpl removeTransaction;
 
     public TransactionController(AddTransactionImpl addTransaction, RemoveTransactionImpl removeTransaction) {
         this.addTransaction = addTransaction;
         this.removeTransaction = removeTransaction;
-    }
-
-    public TransactionController(AddTransactionImpl addTransaction) {
-        this.addTransaction = addTransaction;
     }
 
     @PostMapping("/transacao")
