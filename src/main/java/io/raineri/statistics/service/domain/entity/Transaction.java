@@ -1,4 +1,4 @@
-package io.raineri.statistics.service.entity;
+package io.raineri.statistics.service.domain.entity;
 
 import java.time.OffsetDateTime;
 
@@ -30,6 +30,11 @@ public class Transaction {
         if(value < 0) {
             // Error Handler
         }
+    }
+
+
+    public int getValue() {
+        return value;
     }
 
     public OffsetDateTime getDate() {
