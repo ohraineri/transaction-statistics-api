@@ -1,6 +1,4 @@
-package io.raineri.statistics.service.domain.exception.enums;
-
-import io.raineri.statistics.service.domain.exception.SubcodeException;
+package io.raineri.statistics.service.domain.exception;
 
 public enum TransactionSubcode implements SubcodeException {
     NULL_DATE("Transaction date must not be null."),
