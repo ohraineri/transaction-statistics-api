@@ -183,55 +183,55 @@ curl -X DELETE http://localhost:8080/transacao
 
 # Load / Stress Test (k6)
 
-This repo includes **k6** scripts to load test `POST /transacao` using **random values** and **random past timestamps** (same JSON shape as the API examples).
+This repo includes a **k6** script to stress test `POST /transacao` using **random values** and **random past timestamps** (same JSON shape as the API examples).
 
 ## Run
 
 1) Start the API (default `http://localhost:8080`)
 
-2) Run one of the scripts:
+2) Run the script:
 
 ```bash
-# Simple load test (constant VUs)
-k6 run -e BASE_URL=http://localhost:8080 test.js
-
 # Stress test (stages)
 k6 run -e BASE_URL=http://localhost:8080 k6-stress.js
 ```
 
-Optional env vars for `test.js`:
+Optional env vars for `k6-stress.js`:
 
-- `VUS` (default `10`)
-- `DURATION` (default `30s`)
-- `MAX_PAST_SECONDS` (default `2592000` = 30 days)
-- `VALOR_MIN` / `VALOR_MAX`
+- `BASE_URL` (default `http://localhost:8080`)
+- `ENDPOINT_PATH` (default `/transacao`)
+- `TZ_OFFSET` (default `-03:00`)
+- `MAX_PAST_SECONDS` (default `3600`)
+- `REQUEST_TIMEOUT` (default `10s`)
+- `MIN_SLEEP_MS` / `MAX_SLEEP_MS` (defaults `50` / `300`)
+- `USER_AGENT` (default `k6-stress-test/1.0`)
 
 ## Example result
 
 ```text
 ╔══════════════════════════════════════════════════════════════╗
-║              RELATÓRIO DE STRESS TEST — /transacao           ║
+║  STRESS TEST REPORT — /transacao                             ║
 ╠══════════════════════════════════════════════════════════════╣
-║  Total de requisições   : 1066046                            ║
-║  Taxa de erro           : 0.00%                              ║
-║  Taxa de sucesso        : 100.00%                            ║
+║  Total requests         : 1066046                            ║
+║  Error rate             : 0.00%                              ║
+║  Success rate           : 100.00%                            ║
 ╠══════════════════════════════════════════════════════════════╣
-║  LATÊNCIA (http_req_duration)                                ║
-║  ├ Média                : 0.79ms                             ║
-║  ├ Mediana (p50)        : N/A                                ║
+║  LATENCY (http_req_duration)                                 ║
+║  ├ Average              : 0.79ms                             ║
+║  ├ Median (p50)         : N/A                                ║
 ║  ├ p90                  : 1.05ms                             ║
 ║  ├ p95                  : 1.64ms                             ║
 ║  ├ p99                  : N/A                                ║
-║  └ Máximo               : 66.42ms                            ║
+║  └ Max                  : 66.42ms                            ║
 ╠══════════════════════════════════════════════════════════════╣
 ║  THROUGHPUT                                                  ║
-║  ├ req/s (média)        : 986.97 req/s                       ║
-║  ├ Transações OK        : 1066046                            ║
-║  └ Transações Fail      : N/A                                ║
+║  ├ req/s (avg)          : 986.97 req/s                       ║
+║  ├ Transactions OK      : 1066046                            ║
+║  └ Transactions Failed  : N/A                                ║
 ╠══════════════════════════════════════════════════════════════╣
-║  CONEXÃO                                                     ║
-║  ├ Tempo de conexão p95 : 0.00ms                             ║
-║  └ Tempo de espera p95  : 1.56ms                             ║
+║  CONNECTION                                                  ║
+║  ├ Connect time p95     : 0.00ms                             ║
+║  └ Waiting time p95     : 1.56ms                             ║
 ╚══════════════════════════════════════════════════════════════╝
 ```
 
