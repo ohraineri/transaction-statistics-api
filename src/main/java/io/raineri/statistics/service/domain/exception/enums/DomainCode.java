@@ -1,5 +1,7 @@
 package io.raineri.statistics.service.domain.exception.enums;
 
-public enum DomainCode {
+import io.raineri.statistics.service.domain.exception.CodeException;
+
+public enum DomainCode implements CodeException {
     INVALID_TRANSACTION;
 }
