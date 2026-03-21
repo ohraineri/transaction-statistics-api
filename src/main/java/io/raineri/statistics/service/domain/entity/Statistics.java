@@ -11,7 +11,7 @@ public class Statistics {
     private int maxValue;
 
     public Statistics(ArrayList<Integer> data) {
-        this.count = data.toArray().length;
+        this.count = data.size();
         this.sum = sumItems(data);
         this.average = (this.count == 0) ? 0 : this.sum / this.count;
         this.minValue = searchMinValue(data);
@@ -39,10 +39,16 @@ public class Statistics {
     }
 
     public int searchMaxValue(ArrayList<Integer> data) {
+        if (data.isEmpty()) {
+            return 0;
+        }
         return Collections.max(data);
     }
 
     public int searchMinValue(ArrayList<Integer> data) {
+        if (data.isEmpty()) {
+            return 0;
+        }
         return Collections.min(data);
     }
 
