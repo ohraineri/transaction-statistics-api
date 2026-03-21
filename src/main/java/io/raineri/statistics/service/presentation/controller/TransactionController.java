@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RestController;
-import io.raineri.statistics.service.presentation.dto.RequestTransaction;
+import io.raineri.statistics.service.presentation.dto.TransactionRequest;
 import io.raineri.statistics.service.presentation.mapper.TransactionMapper;
 import io.raineri.statistics.service.application.usecase.contract.AddTransactionImpl;
 import io.raineri.statistics.service.application.usecase.contract.RemoveTransactionImpl;
@@ -22,7 +22,7 @@ public class TransactionController {
     }
 
     @PostMapping("/transacao")
-    public void store(@Validated @RequestBody RequestTransaction request) {
+    public void store(@Validated @RequestBody TransactionRequest request) {
         this.addTransaction.execute(TransactionMapper.toEntity(request));
     }
 
