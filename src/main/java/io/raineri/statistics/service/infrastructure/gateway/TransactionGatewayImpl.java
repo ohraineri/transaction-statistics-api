@@ -1,9 +1,10 @@
 package io.raineri.statistics.service.infrastructure.gateway;
 
+import io.raineri.statistics.service.application.gateway.TransactionGateway;
 import io.raineri.statistics.service.domain.entity.Transaction;
 import io.raineri.statistics.service.infrastructure.database.Database;
 
-public class TransactionGatewayImpl implements io.raineri.statistics.service.application.gateway.TransactionGateway {
+public class TransactionGatewayImpl implements TransactionGateway {
 
     @Override
     public void addTransaction(Transaction transaction) {
