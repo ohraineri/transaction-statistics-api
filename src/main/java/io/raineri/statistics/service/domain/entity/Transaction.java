@@ -1,7 +1,7 @@
 package io.raineri.statistics.service.domain.entity;
 
 import io.raineri.statistics.service.domain.exception.TransactionException;
-import io.raineri.statistics.service.domain.exception.enums.TransactionSubcode;
+import io.raineri.statistics.service.domain.exception.TransactionSubcode;
 
 import java.time.OffsetDateTime;
 
