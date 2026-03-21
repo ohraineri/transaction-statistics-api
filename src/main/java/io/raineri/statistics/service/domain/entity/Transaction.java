@@ -1,5 +1,8 @@
 package io.raineri.statistics.service.domain.entity;
 
+import io.raineri.statistics.service.domain.exception.TransactionException;
+import io.raineri.statistics.service.domain.exception.enums.TransactionSubcode;
+
 import java.time.OffsetDateTime;
 
 public class Transaction {
@@ -14,21 +17,22 @@ public class Transaction {
     }
 
     private void checkDate(OffsetDateTime date) {
+        final OffsetDateTime PRESENT_DATE = OffsetDateTime.now();
         if (date == null) {
-            // Error Handler
+            throw new TransactionException(TransactionSubcode.NULL_DATE);
         }
-        if(date.isAfter(OffsetDateTime.now())) {
-            // Error Handler
+        if(date.isAfter(PRESENT_DATE)) {
+            throw new TransactionException(TransactionSubcode.FUTURE_DATE);
         }
 
-        if(date.isEqual(OffsetDateTime.now())) {
-            // Error Handler
+        if(date.isEqual(PRESENT_DATE)) {
+            throw new TransactionException(TransactionSubcode.PRESENT_DATE);
         }
     }
 
     private void checkValue(int value) {
         if(value < 0) {
-            // Error Handler
+            throw new TransactionException(TransactionSubcode.NEGATIVE_VALUE);
         }
     }
 
