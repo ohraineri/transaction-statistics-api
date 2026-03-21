@@ -1,8 +1,7 @@
 package io.raineri.statistics.service.application.usecase.contract;
 
-import java.time.OffsetDateTime;
-import java.util.ArrayList;
+import io.raineri.statistics.service.domain.entity.Statistics;
 
 public interface RetrieveStatisticsImpl {
-    public ArrayList<Integer> getDataByDate(OffsetDateTime startDate, OffsetDateTime endDate);
+    public Statistics execute(long secondsRange);
 }
