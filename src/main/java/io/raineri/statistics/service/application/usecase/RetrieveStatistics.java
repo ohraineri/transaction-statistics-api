@@ -1,27 +1,27 @@
 package io.raineri.statistics.service.application.usecase;
 
+import io.raineri.statistics.service.application.gateway.StatisticsGateway;
 import io.raineri.statistics.service.application.usecase.contract.RetrieveStatisticsImpl;
 import io.raineri.statistics.service.domain.entity.Statistics;
 
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
 
-public class RetrieveStatistics {
-    final private long DEFAULT_SECONDS = 60;
-    final private RetrieveStatisticsImpl retrieveStatistics;
+public class RetrieveStatistics implements RetrieveStatisticsImpl {
+    private static final long DEFAULT_SECONDS = 60;
+    private final StatisticsGateway statisticsGateway;
 
-    public RetrieveStatistics(RetrieveStatisticsImpl retrieveStatistics) {
-        this.retrieveStatistics = retrieveStatistics;
+    public RetrieveStatistics(StatisticsGateway statisticsGateway) {
+        this.statisticsGateway = statisticsGateway;
     }
 
-    public Statistics execute(int secondRange) {
-        if(secondRange > 60) {
-            ArrayList<Integer> data = this.retrieveStatistics.getDataByDate(OffsetDateTime.now().minusSeconds(secondRange), OffsetDateTime.now());
-            return new Statistics(data);
-        }
+    @Override
+    public Statistics execute(long secondsRange) {
+        long range = (secondsRange > 0 && secondsRange <= DEFAULT_SECONDS) ? secondsRange : DEFAULT_SECONDS;
 
-        ArrayList<Integer> data = this.retrieveStatistics.getDataByDate(OffsetDateTime.now().minusSeconds(DEFAULT_SECONDS), OffsetDateTime.now());
-        return new Statistics(data);
+        OffsetDateTime now = OffsetDateTime.now();
+        return new Statistics(
+                this.statisticsGateway.getValuesByDateRange(now.minusSeconds(range), now)
+        );
     }
 
 }
